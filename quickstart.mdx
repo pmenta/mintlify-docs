@@ -1,86 +1,42 @@
 ---
-title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+title: 'Primeiros Passos'
 ---
 
-## Setup your development
+Bem-vindo ao guia de primeiros passos da JUDIT! Vamos guiá-lo através dos passos necessários para começar a usar nossa API.
 
-Learn how to update your docs locally and and deploy them to the public.
+## Adquira Seu Plano
 
-### Edit and preview
+Para começar a usar a JUDIT, você precisará adquirir um de nossos planos. Entre em contato conosco para conhecer nossas opções de planos e escolher o que melhor se adapta às suas necessidades.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
-  </Accordion>
-</AccordionGroup>
+## Gere Sua API Key
 
-### Deploy your changes
+Após a aquisição do plano, você poderá gerar sua API Key através da nossa dashboard. A API Key é necessária para autenticar suas solicitações à nossa API.
 
-<AccordionGroup>
+1. Acesse a dashboard da <a href="https://app.judit.io" target="blank"> JUDIT </a>.
+2. Logue com seu usuário ou crie a sua conta.
+3. Vá para a seção "API Keys", nos dados do usuário e clique em configurar.
+4. Gere uma nova API Key e salve.
+5. Clique novamente no botão configurar da seção "API Keys" e copie a sua API Key.
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+Lembre-se de manter sua API Key segura. Não a compartilhe publicamente ou com pessoas que não deveriam ter acesso, ela é o seu controle de requisições com a JUDIT.
 
-</AccordionGroup>
+## Usando a API Key
 
-## Update your docs
+Com a API Key gerada, agora você pode começar a fazer solicitações para a API da JUDIT. Para isso, você deverá incluir a API Key no parâmetro `api-key` do cabeçalho das suas requisições.
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+## Buscando Seu Primeiro Processo
 
-<CardGroup>
+Para buscar um processo, você deverá fazer uma requisição POST para a rota `/requests`.
 
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
+Aqui está um exemplo de como fazer isso usando curl:
 
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
-</CardGroup>
+```bash
+curl -X POST "https://requests.prod.judit.io/requests" \
+-H "api-key: YOUR_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+	"user_id": "5ccba00e-1563-4418-91a4-c164b9f02411",
+    "search_type": "lawsuit_cnj",
+    "search_key": "0010137-92.2023.5.03.0077"
+}'
+```

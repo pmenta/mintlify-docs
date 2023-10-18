@@ -1,82 +1,71 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "JUDIT - Docs",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#9563FF",
-    "light": "#AE87FF",
-    "dark": "#0D001D",
-    "background": {
-      "dark": "#090014"
-    },
-    "anchors": {
-      "from": "#FF7F57",
-      "to": "#9563FF"
-    }
+    "primary": "#15BE62",
+    "light": "#0CAE56",
+    "dark": "#15BE62"
+  },
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": true
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "Swagger",
+      "url": "https://api.judit.io/api"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://app.judit.io"
   },
   "tabs": [
     {
-      "name": "API Reference",
+      "name": "Referência da API",
       "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "group": "Comece a usar",
+      "pages": ["introduction", "quickstart"]
     },
     {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
+      "group": "Essenciais",
+      "pages": [
+        "essentials/requests",
+        "essentials/tracking",
+        "essentials/glossary"
+      ]
     },
     {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
-    },
-    {
-      "group": "Endpoint Examples",
+      "group": "Endpoints de exemplo",
       "pages": [
         "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/new-tracking",
+        "api-reference/endpoint/find-trackings",
+        "api-reference/endpoint/get-tracking",
+        "api-reference/endpoint/deactivate-tracking",
+        "api-reference/endpoint/find-attachment"
       ]
     }
   ],
-  "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
-  }
+  "primaryTab": {
+    "name": "Documentação"
+  },
+  "api": {
+    "baseUrl": "http://api.judit.io",
+    "auth": {
+      "method": "key",
+      "name": "api-key"
+    }
+  },
+  "openapi": "http://api.judit.io/api-json",
+  "backgroundImage": "/images/background.png"
 }
