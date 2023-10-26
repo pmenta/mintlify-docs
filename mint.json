@@ -34,7 +34,10 @@
   "navigation": [
     {
       "group": "Comece a usar",
-      "pages": ["introduction", "quickstart"]
+      "pages": [
+        "introduction",
+        "quickstart"
+      ]
     },
     {
       "group": "Essenciais",
@@ -81,7 +84,10 @@
     "name": "Documentação"
   },
   "api": {
-    "baseUrl": ["https://requests.stage.judit.io", "https://tracking.stage.judit.io"],
+    "baseUrl": [
+      "https://requests.stage.judit.io",
+      "https://tracking.stage.judit.io"
+    ],
     "auth": {
       "method": "key",
       "name": "api-key"
@@ -89,6 +95,5 @@
     "playground": {
       "mode": "show"
     }
-  },
-  "backgroundImage": "/images/background.png"
+  }
 }
