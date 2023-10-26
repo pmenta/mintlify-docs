@@ -16,21 +16,23 @@ Para buscar um processo, você deve realizar uma solicitação POST para a rota 
 
 A solicitação POST deve incluir um payload com as seguintes propriedades:
 
-- `search_type`: Esse campo define o tipo de entidade que você quer buscar. Pode ser **"cpf"**,  **"cnpj"**, **"oab"** ou **"lawsuit_cnj"** para um número de processo;
+- `search`: Um objeto com as propriedades da busca
 
-- `search_key`: O número do processo (Código CNJ), CPF, CNPJ ou OAB que você deseja buscar;
+    - `search_type`: Esse campo define o tipo de entidade que você quer buscar. Pode ser **"cpf"**,  **"cnpj"**, **"oab"** ou **"lawsuit_cnj"** para um número de processo;
 
-- `response_type` (opcional): Esse campo define o tipo de retorno dos dados da busca podendo ser **"lawsuit"**,**"parties"**, **"attachments"**, **"steps"** ou **"lawsuits"**;
+    - `search_key`: O número do processo (Código CNJ), CPF, CNPJ ou OAB que você deseja buscar;
 
-- `accept_cache` (opcional): Define se o resultado da busca pode ser um cache válido podendo ser **"true"** ou **"false"**;
+    - `response_type` (opcional): Esse campo define o tipo de retorno dos dados da busca podendo ser **"lawsuit"**,**"parties"**, **"attachments"**, **"steps"** ou **"lawsuits"**;
 
-- `cache_ttl_in_days` (opcional): Número inteiro que define até quantos dias o resultado da busca pode considerar um cache válido;
+    - `accept_cache` (opcional): Define se o resultado da busca pode ser um cache válido podendo ser **"true"** ou **"false"**;
 
-- `search_params`: Um objeto que contém alguns parâmetros da busca como:
+    - `cache_ttl_in_days` (opcional): Número inteiro que define até quantos dias o resultado da busca pode considerar um cache válido;
 
-        `lawsuit_instance` (opcional): Este parâmetro permite definir a instância em que deseja buscar o processo.
+    - `search_params`: Um objeto que contém alguns parâmetros da busca como:
 
-        `side_filter` (opcional): Este parâmetro permite definir os tipos de participantes do processo podendo ser 'Passive', 'Active', 'Interested', 'Unknown';
+        -  `lawsuit_instance` (opcional): Este parâmetro permite definir a instância em que deseja buscar o processo.
+
+        -  `side_filter` (opcional): Este parâmetro permite definir os tipos de participantes do processo podendo ser 'Passive', 'Active', 'Interested', 'Unknown';
 
   Caso o processo consultado de tenha um ou mais processos relacionado ou em alguma outra instância, esses processos serão retornados também.
 
@@ -38,14 +40,16 @@ Aqui está um exemplo de como um payload pode parecer:
 
 ```json
 {
-    "search_type": "lawsuit_cnj",
-    "search_key": "0010137-92.2023.5.03.0077",
-    "response_type": "lawsuit",
-    "accept_cache": "true",
-    "cache_ttl_in_days": 1,
-    "search_params": {
-        "lawsuit_instance": 2,
-        "side_filter": "ACTIVE"
+    "search": {
+        "search_type": "lawsuit_cnj",
+        "search_key": "0010137-92.2023.5.03.0077",
+        "response_type": "lawsuit",
+        "accept_cache": "true",
+        "cache_ttl_in_days": 1,
+        "search_params": {
+            "lawsuit_instance": 2,
+            "side_filter": "ACTIVE"
+         }
     }
 }
 ```
@@ -57,15 +61,17 @@ curl -X POST "https://requests.prod.judit.io/requests"
 -H "api-key: YOUR_API_KEY"
 -H "Content-Type: application/json"
 -d '{
-        "search_type": "lawsuit_cnj",
-        "search_key": "0010137-92.2023.5.03.0077",
-        "response_type": "lawsuit",
-        "accept_cache": "true",
-        "cache_ttl_in_days": 1,
-        "search_params": {
-            "lawsuit_instance": 2,
-            "side_filter": "ACTIVE",
-        },
+        "search": {
+            "search_type": "lawsuit_cnj",
+            "search_key": "0010137-92.2023.5.03.0077",
+            "response_type": "lawsuit",
+            "accept_cache": "true",
+            "cache_ttl_in_days": 1,
+            "search_params": {
+                "lawsuit_instance": 2,
+                "side_filter": "ACTIVE"
+            }
+        }
 }'
 ```
 ## Consultando Suas Buscas

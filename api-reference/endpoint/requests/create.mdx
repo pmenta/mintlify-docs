@@ -5,33 +5,37 @@ api: "POST https://requests.stage.judit.io/requests"
 description: "Esse endpoint cria uma busca de processos por documento(CPF, CNPJ, OAB) ou Código CNJ"
 ---
 
-<ParamField body="search_type" type="string" required>
-    Define o tipo de entidade que você quer buscar: “cpf”, “cnpj”, “oab” ou “lawsuit_cnj”;
-</ParamField>
-
-<ParamField body="search_key" type="string" required>
-    Número do processo (Código CNJ), CPF, CNPJ ou OAB;
-</ParamField>
-
-<ParamField body="response_type" type="string" required={false}>
-    Define o tipo de retorno dos dados da busca: "lawsuit", "parties", "attachments", "step" ou "lawsuits";
-</ParamField>
-
-<ParamField body="accept_cache" type="boolean" required={false}>
-    Define se o resultado da busca pode ser um cache válido;
-</ParamField>
-
-<ParamField body="cache_ttl_in_days" type="integer" required={false}>
-    Define até quantos dias o resultado da busca pode considerar um cache válido;
-</ParamField>
-
-<ParamField body="search_params" type="object" required={false}>
+<ParamField body="search" type="object" required={true}>
     <Expandable title="properties">
-        <ParamField body="lawsuit_instance" name="lawsuit_instance" type="integer" required={false}>
-            Defini a instância em que deseja buscar o processo;
+        <ParamField body="search_type" type="string" required>
+            Define o tipo de entidade que você quer buscar: “cpf”, “cnpj”, “oab” ou “lawsuit_cnj”;
         </ParamField>
-        <ParamField body="side_filter" name="side_filter" type="string" required={false}>
-            Defini os tipos de participantes do processo: ‘Passive’, ‘Active’, ‘Interested’, ‘Unknown’;
+
+        <ParamField body="search_key" type="string" required>
+            Número do processo (Código CNJ), CPF, CNPJ ou OAB;
+        </ParamField>
+
+        <ParamField body="response_type" type="string" required={false}>
+            Define o tipo de retorno dos dados da busca: "lawsuit", "parties", "attachments", "step" ou "lawsuits";
+        </ParamField>
+
+        <ParamField body="accept_cache" type="boolean" required={false}>
+            Define se o resultado da busca pode ser um cache válido;
+        </ParamField>
+
+        <ParamField body="cache_ttl_in_days" type="integer" required={false}>
+            Define até quantos dias o resultado da busca pode considerar um cache válido;
+        </ParamField>
+
+        <ParamField body="search_params" type="object" required={false}>
+            <Expandable title="properties">
+                <ParamField body="lawsuit_instance" name="lawsuit_instance" type="integer" required={false}>
+                    Defini a instância em que deseja buscar o processo;
+                </ParamField>
+                <ParamField body="side_filter" name="side_filter" type="string" required={false}>
+                    Defini os tipos de participantes do processo: ‘Passive’, ‘Active’, ‘Interested’, ‘Unknown’;
+                </ParamField>
+            </Expandable>
         </ParamField>
     </Expandable>
 </ParamField>
@@ -43,32 +47,36 @@ description: "Esse endpoint cria uma busca de processos por documento(CPF, CNPJ,
     -H "api-key: YOUR_API_KEY"
     -H "Content-Type: application/json"
     -d {
-        "search_type": "lawsuit_cnj",
-        "search_key": "0010137-92.2023.5.03.0077",
-        "response_type": "lawsuit",
-        "accept_cache": "true",
-        "cache_ttl_in_days": 1,
-        "search_params": {
-            "lawsuit_instance": 2,
-            "side_filter": "ACTIVE",
-        },
+        "search": {
+            "search_type": "lawsuit_cnj",
+            "search_key": "0010137-92.2023.5.03.0077",
+            "response_type": "lawsuit",
+            "accept_cache": "true",
+            "cache_ttl_in_days": 1,
+            "search_params": {
+                "lawsuit_instance": 2,
+                "side_filter": "ACTIVE",
+            },
+        }
     }
     ```
 
     ```node Javascript
         const options = {
             method: 'GET',
-            headers: {api-key: 'c194e4c9-af6c-482f-b695-a1267c7d1ee7'},
+            headers: {api-key: 'your-api-key-here'},
             body: {
-                "search_type": "lawsuit_cnj",
-                "search_key": "0010137-92.2023.5.03.0077",
-                "response_type": "lawsuit",
-                "accept_cache": "true",
-                "cache_ttl_in_days": 1,
-                "search_params": {
-                    "lawsuit_instance": 2,
-                    "side_filter": "ACTIVE",
-                },
+                "search": {
+                    "search_type": "lawsuit_cnj",
+                    "search_key": "0010137-92.2023.5.03.0077",
+                    "response_type": "lawsuit",
+                    "accept_cache": "true",
+                    "cache_ttl_in_days": 1,
+                    "search_params": {
+                        "lawsuit_instance": 2,
+                        "side_filter": "ACTIVE",
+                    },
+                }
             }
         };
 
@@ -80,7 +88,7 @@ description: "Esse endpoint cria uma busca de processos por documento(CPF, CNPJ,
 
     ```node PHP
     $url  = 'http://server.com';
-    $data = ['api-key' => 'c194e4c9-af6c-482f-b695-a1267c7d1ee7'];
+    $data = ['api-key' => 'your-api-key-here'];
     $data = [
     'search_type' => 'lawsuit_cnj',
     'search_key' => '0010137-92.2023.5.03.0077',
@@ -126,14 +134,16 @@ description: "Esse endpoint cria uma busca de processos por documento(CPF, CNPJ,
         const Url = "https://requests.stage.judit.io/requests"
 
         jsonValue := []byte(`{
-            "search_type": "lawsuit_cnj",
-            "search_key": "0010137-92.2023.5.03.0077",
-            "response_type": "lawsuit",
-            "accept_cache": "true",
-            "cache_ttl_in_days": 1,
-            "search_params": {
-                "lawsuit_instance": 2,
-                "side_filter": "ACTIVE",
+            "search": {
+                "search_type": "lawsuit_cnj",
+                "search_key": "0010137-92.2023.5.03.0077",
+                "response_type": "lawsuit",
+                "accept_cache": "true",
+                "cache_ttl_in_days": 1,
+                "search_params": {
+                    "lawsuit_instance": 2,
+                    "side_filter": "ACTIVE",
+                },
             }
          }`)
 
@@ -154,18 +164,20 @@ description: "Esse endpoint cria uma busca de processos por documento(CPF, CNPJ,
 
 
     new_data = {
-        "search_type": "lawsuit_cnj",
-        "search_key": "0010137-92.2023.5.03.0077",
-        "response_type": "lawsuit",
-        "accept_cache": "true",
-        "cache_ttl_in_days": 1,
-        "search_params": {
-            "lawsuit_instance": 2,
-            "side_filter": "ACTIVE",
+        "search": {
+            "search_type": "lawsuit_cnj",
+            "search_key": "0010137-92.2023.5.03.0077",
+            "response_type": "lawsuit",
+            "accept_cache": "true",
+            "cache_ttl_in_days": 1,
+            "search_params": {
+                "lawsuit_instance": 2,
+                "side_filter": "ACTIVE",
+            },
         }
     }
 
-    headers = {"api-key": "c194e4c9-af6c-482f-b695-a1267c7d1ee7"}
+    headers = {"api-key": "your-api-key-here"}
 
     response = requests.request("POST", url, headers=headers, json=new_data)
 
@@ -175,7 +187,7 @@ description: "Esse endpoint cria uma busca de processos por documento(CPF, CNPJ,
     ```java Java
 
     HttpResponse<String> response = Unirest.post("https://requests.stage.judit.io/requests)
-    .header("api-key", "c194e4c9-af6c-482f-b695-a1267c7d1ee7")
+    .header("api-key", "your-api-key-here")
     .body("{"search_type\": \"lawsuit_cnj\",\"search_key\": \"0010137-92.2023.5.03.0077\",\"response_type\": \"lawsuit\",\"response_type\": \"lawsuit\", \"accept_cache\": \"true\",\"cache_ttl_in_days\": 1,\"search_params\":\{\"lawsuit_instance\": \2,\"side_filter\": \"ACTIVE\"}}"})
     .asString();
     ```
