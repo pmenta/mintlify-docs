@@ -36,5 +36,8 @@ yarn-error.log*
 dist/
 
 # Editors
+*.idea
 .idea
+.idea/*
 *.iml
+*.xml
